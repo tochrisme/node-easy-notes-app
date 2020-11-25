@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: default-http-backend
+  namespace: ingress
   labels:
     app: default-http-backend
 spec:
@@ -18,6 +19,11 @@ spec:
       containers:
       - name: default-http-backend
         image: gcr.io/google_containers/defaultbackend:1.4
+        resources: 
+          limits:
+            memory: 80M
+          requests:
+            memory: 50M
         livenessProbe:
           httpGet:
             path: /healthz

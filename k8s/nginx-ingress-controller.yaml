@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: nginx-ingress-controller
-  namespace: default
+  namespace: ingress
 spec:
   replicas: 1
   selector:
@@ -16,6 +16,11 @@ spec:
       containers:
         - name: nginx-ingress-controller
           image: quay.io/kubernetes-ingress-controller/nginx-ingress-controller:0.13.0
+          # resources: 
+          #   limits:
+          #     memory: 80M
+          #   requests:
+          #     memory: 50M
           args:
             - /nginx-ingress-controller
             - --default-backend-service=default/default-http-backend

@@ -5,7 +5,7 @@ metadata:
     app: easy-notes
   name: easy-notes
 spec:
-  replicas: 2
+  replicas: 1 
   selector:
     matchLabels:
       app: easy-notes-pod
@@ -19,7 +19,11 @@ spec:
         env:
         - name: MONGO_URL
           value: mongodb://mongodb-service:27017/easy-notes
-        resources: {}
+        resources: 
+          limits:
+            memory: 80M
+          requests:
+            memory: 50M
         image: nodet/node-easy-notes-app:latest
         imagePullPolicy: Never
         ports:
